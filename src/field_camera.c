@@ -212,13 +212,13 @@ void CurrentMapDrawMetatileAt(int x, int y)
     }
 }
 
-void DrawDoorMetatileAt(int x, int y, u16 *arr)
+void DrawDoorMetatileAt(int x, int y, u16 *tiles)
 {
     int offset = MapPosToBgTilemapOffset(&sFieldCameraOffset, x, y);
 
     if (offset >= 0)
     {
-        DrawMetatile(0xFF, arr, offset);
+        DrawMetatile(0xFF, tiles, offset);
         sFieldCameraOffset.copyBGToVRAM = TRUE;
     }
 }
