@@ -37,6 +37,7 @@ porymap.project.cfg
 .ccls-cache/*
 .ropeproject/
 overworld/
+tools/poryscript
 *.sna
 *.diff
 *.sym
