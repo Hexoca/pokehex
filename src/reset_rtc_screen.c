@@ -185,6 +185,10 @@ const struct SpritePalette gSpritePalette_Arrow =
 {
     sArrow_Pal, PALTAG_ARROW
 };
+const struct SpritePalette sSpritePalette_Arrow =
+{
+    sArrow_Pal, PALTAG_ARROW
+};
 
 static const union AnimCmd sAnim_Arrow_Down[] =
 {
@@ -218,6 +222,16 @@ static const union AnimCmd *const sAnims_Arrow[] =
 };
 
 const struct SpriteTemplate gSpriteTemplate_Arrow =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = PALTAG_ARROW,
+    .oam = &sOamData_Arrow,
+    .anims = sAnims_Arrow,
+    .images = sPicTable_Arrow,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+const struct SpriteTemplate sSpriteTemplate_Arrow =
 {
     .tileTag = TAG_NONE,
     .paletteTag = PALTAG_ARROW,
