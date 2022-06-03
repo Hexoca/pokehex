@@ -6554,7 +6554,7 @@ void SetWildMonHeldItem(void)
         u16 rnd;
         u16 species;
         u16 chanceNoItem = 45;
-        u16 chanceCommon = 95;
+        u16 chanceNotRare = 95;
         u16 count = (WILD_DOUBLE_BATTLE) ? 2 : 1;
         u16 i;
 
@@ -6563,7 +6563,7 @@ void SetWildMonHeldItem(void)
                 || GetMonAbility(&gPlayerParty[0]) == ABILITY_SUPER_LUCK))
         {
             chanceNoItem = 20;
-            chanceCommon = 80;
+            chanceNotRare = 80;
         }
 
         for (i = 0; i < count; i++)
@@ -6579,7 +6579,7 @@ void SetWildMonHeldItem(void)
                 if (alteringCaveId != 0)
                 {
                     // In active Altering Cave, use special item list
-                    if (rnd < chanceCommon)
+                    if (rnd < chanceNotRare)
                         continue;
                     SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &sAlteringCaveWildMonHeldItems[alteringCaveId].item);
                 }
@@ -6588,7 +6588,7 @@ void SetWildMonHeldItem(void)
                     // In inactive Altering Cave, use normal items
                     if (rnd < chanceNoItem)
                         continue;
-                    if (rnd < chanceCommon)
+                    if (rnd < chanceNotRare)
                         SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].itemCommon);
                     else
                         SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].itemRare);
@@ -6596,7 +6596,7 @@ void SetWildMonHeldItem(void)
             }
             else
             {
-                if (gBaseStats[species].item1 == gBaseStats[species].item2 && gBaseStats[species].item1 != ITEM_NONE)
+                if (gBaseStats[species].itemCommon == gBaseStats[species].itemRare && gBaseStats[species].itemCommon != ITEM_NONE)
                 {
                     // Both held items are the same, 100% chance to hold item
                     SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].itemCommon);
@@ -6605,7 +6605,7 @@ void SetWildMonHeldItem(void)
                 {
                     if (rnd < chanceNoItem)
                         continue;
-                    if (rnd < chanceCommon)
+                    if (rnd < chanceNotRare)
                         SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].itemCommon);
                     else
                         SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBaseStats[species].itemRare);
