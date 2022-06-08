@@ -109,11 +109,6 @@ void FillPalette(u16 value, u16 offset, u16 size)
     CpuFill16(value, &gPlttBufferFaded[offset], size);
 }
 
-void FillPaletteFaded(u16 value, u16 offset, u16 size)
-{
-    CpuFill16(value, &gPlttBufferFaded[offset], size);
-}
-
 void TransferPlttBuffer(void)
 {
     if (!gPaletteFade.bufferTransferDisabled)
