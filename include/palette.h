@@ -68,6 +68,7 @@ void LoadCompressedPalette(const u32 *, u16, u16);
 void LoadPalette(const void *, u16, u16);
 void LoadPaletteFast(const void *src, u16 offset, u16 size);
 void FillPalette(u16, u16, u16);
+void FillPaletteFaded(u16, u16, u16);
 void TransferPlttBuffer(void);
 u8 UpdatePaletteFade(void);
 void ResetPaletteFade(void);

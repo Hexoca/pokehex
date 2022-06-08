@@ -946,8 +946,7 @@ static void Task_UpdateButtonFlash(u8 taskId)
 
     if (task->tButtonId == BUTTON_COUNT || !task->tAllowFlash)
         return;
-
-    MultiplyInvertedPaletteRGBComponents(GetButtonPalOffset(task->tButtonId), task->tColor, task->tColor, task->tColor);
+    MultiplyInvertedPaletteRGBComponents(GetButtonPalOffset(task->tButtonId), 0, 0, task->tColor);
 
     if (task->tColorDelay && --task->tColorDelay)
         return;
@@ -1043,7 +1042,7 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
        || sprite->sX != sprite->sPrevX
        || sprite->sY != sprite->sPrevY)
     {
-        sprite->sColor = 0;
+        sprite->sColor = 4;
         sprite->sColorIncr = 2;
         sprite->sColorDelay = 2;
     }
@@ -1063,7 +1062,7 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
         s8 r = sprite->sColor >> 1;
         u16 index = IndexOfSpritePaletteTag(PALTAG_CURSOR) * 16 + 0x0101;
 
-        MultiplyInvertedPaletteRGBComponents(index, r, gb, gb);
+        MultiplyInvertedPaletteRGBComponents(index, 0, 0, gb);
     }
 }
 
@@ -1490,6 +1489,12 @@ static bool8 KeyboardKeyHandler_Character(u8 input)
     {
         bool8 textFull = AddTextCharacter();
 
+            if (sNamingScreen ->currentPage == KBPAGE_LETTERS_UPPER && GetTextEntryPosition() == 1)
+            {
+                MainState_StartPageSwap();
+            }
+            
+
         SquishCursor();
         if (textFull)
         {
@@ -1713,7 +1718,7 @@ static void HandleDpadMovement(struct Task *task)
 
 static void DrawNormalTextEntryBox(void)
 {
-    FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(1));
+    FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(15));
     AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_NORMAL, sNamingScreen->template->title, 8, 1, 0, 0);
     PutWindowTilemap(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX]);
 }
@@ -1724,7 +1729,7 @@ static void DrawMonTextEntryBox(void)
 
     StringCopy(buffer, gSpeciesNames[sNamingScreen->monSpecies]);
     StringAppendN(buffer, sNamingScreen->template->title, 15);
-    FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(1));
+    FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(15));
     AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_NORMAL, buffer, 8, 1, 0, 0);
     PutWindowTilemap(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX]);
 }
@@ -1913,7 +1918,7 @@ static void DrawTextEntry(void)
     u8 maxChars = sNamingScreen->template->maxChars;
     u16 x = sNamingScreen->inputCharBaseXPos - 0x40;
 
-    FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY], PIXEL_FILL(1));
+    FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY], PIXEL_FILL(15));
 
     for (i = 0; i < maxChars; i++)
     {
