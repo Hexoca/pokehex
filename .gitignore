@@ -42,3 +42,4 @@ tools/poryscript
 *.diff
 *.sym
 *.js
+mgba.sh

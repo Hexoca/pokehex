@@ -37,6 +37,8 @@
 #include "title_screen.h"
 #include "window.h"
 #include "mystery_gift_menu.h"
+#include "hex_config.h"
+#include "mgba_printf/mgba.h"
 
 /*
  * Main menu state machine
